@@ -2,7 +2,6 @@
 var currentRoom;
 var app = {
   init: function() {
-    $('form').on('submit', app.handleSubmit);    
     app.fetch();
     // var oldMessages = app.fetch();
     // console.log(oldMessages);
@@ -65,7 +64,7 @@ var app = {
     if (app.users.followers.includes(message.username)) {
       $message.toggleClass('friend');
     }
-    if (roomName === undefined || (roomName === message.roomname)) {
+    if (roomName === undefined || roomName === 'allRooms' || (roomName === message.roomname)) {
       $('#chats').append($message);
     }
     
@@ -92,7 +91,6 @@ var app = {
   },
   handleSubmit: function(event) {
     event.preventDefault();
-    console.log('The handleSubmit function is running!');
     // create object from inputs
     // console.log(prompt('What is your name?') || 'anonymous')
       var url = window.location.href;
@@ -104,9 +102,6 @@ var app = {
         text: text,
         roomname: currentRoom
       }
-      console.log(username);
-      console.log(text);
-      console.log(currentRoom);
     app.send(message);
     // $('<p id="messageSent">Message sent!</p>').appendTo($('#main'));
     app.clearMessages();
@@ -118,7 +113,15 @@ var app = {
     app.clearMessages();
     app.fetch(currentRoom);
   },
-  users: {username: 'us', followers: []}
+  users: {username: 'us', followers: []},
+  createRoom: function(event) {
+    console.log('we are in create room')
+    var text = $('#newRoom').val();
+    console.log(text)
+    app.rooms.push(text)
+    app.clearMessages();
+    app.fetch(text);
+  }
 };
 
 // var message = {
@@ -129,7 +132,8 @@ var app = {
 
 app.init();
 $(document).ready(function() {
-  $('form').on('submit', app.handleSubmit);
+  $('form').on('submit', app.handleSubmit);  
+  $('#createRoomButton').on('click', app.createRoom);
   $('#roomSelect').on('change', app.renderRoom);
   $('.newTweets').on('click', app.addNewTweets);
 });
