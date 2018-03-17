@@ -1,12 +1,12 @@
 // $(document).ready(function() {
-
+var currentRoom;
 var app = {
   init: function() {
     $('form').on('submit', app.handleSubmit);    
     app.fetch();
     // var oldMessages = app.fetch();
     // console.log(oldMessages);
-    $('.newTweets').on('click', app.addNewTweets);
+    // $('.newTweets').on('click', app.addNewTweets);
   },
   send: function(data) {
     $.ajax({
@@ -59,10 +59,9 @@ var app = {
     if (!(app.rooms.includes(message.roomname))) {
       app.rooms.push(message.roomname);
     }
-    message.text = escape(message.text) || 'No message specified';
+    message.text = _.escape(message.text) || 'No message specified';
     message.username = message.username || 'No username specified';
-    $message = $('<div class="tweet"><p class="username"></p><p id="message"></p><p class="room"></p></div>');
-    $message.username.text
+    $message = $('<div class="tweet"><p class="username">' + message.username + '</p><p id="message">' + message.text + '</p><p class="room">' + message.roomname + '</p></div>');
     if (app.users.followers.includes(message.username)) {
       $message.toggleClass('friend');
     }
@@ -74,7 +73,8 @@ var app = {
   renderRoom: function(room) {
     // $room = '<p>' + room + '</p>';
     // $('#roomSelect').append($room);
-    var roomName = this.value;
+    var roomName = event.target.value;
+    currentRoom = roomName;
     app.clearMessages();
     app.fetch(roomName);
   },
@@ -90,25 +90,34 @@ var app = {
     app.fetch();
     // return true;
   },
-  handleSubmit: function(text) {
+  handleSubmit: function(event) {
+    event.preventDefault();
     console.log('The handleSubmit function is running!');
     // create object from inputs
     // console.log(prompt('What is your name?') || 'anonymous')
-      var url = window.location.href
+      var url = window.location.href;
       var index = url.indexOf('username=');
       var username = url.slice(index + 9);
-      var text = $('#target input').value
+      var text = $('#messageInput').val();
       var message = {
         username: username,
         text: text,
-        roomname: null
+        roomname: currentRoom
       }
-    app.send(object)
-        
+      console.log(username);
+      console.log(text);
+      console.log(currentRoom);
+    app.send(message);
+    // $('<p id="messageSent">Message sent!</p>').appendTo($('#main'));
+    app.clearMessages();
+    app.fetch(currentRoom);
   },
 
   server: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages',
-  addNewTweets: function() {},
+  addNewTweets: function() {
+    app.clearMessages();
+    app.fetch(currentRoom);
+  },
   users: {username: 'us', followers: []}
 };
 
@@ -122,5 +131,6 @@ app.init();
 $(document).ready(function() {
   $('form').on('submit', app.handleSubmit);
   $('#roomSelect').on('change', app.renderRoom);
+  $('.newTweets').on('click', app.addNewTweets);
 });
 // });
