@@ -9,15 +9,15 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script>
-      // YOU DO NOT NEED TO EDIT THIS CODE
-      if (!/(&|\?)username=/.test(window.location.search)) {
-        var newSearch = window.location.search;
-        if (newSearch !== '' & newSearch !== '?') {
-          newSearch += '&';
-        }
-        newSearch += 'username=' + (prompt('What is your name?') || 'anonymous');
-        window.location.search = newSearch;
-      }
+      // // YOU DO NOT NEED TO EDIT THIS CODE
+      // if (!/(&|\?)username=/.test(window.location.search)) {
+      //   var newSearch = window.location.search;
+      //   if (newSearch !== '' & newSearch !== '?') {
+      //     newSearch += '&';
+      //   }
+      //   newSearch += 'username=' + (prompt('What is your name?') || 'anonymous');
+      //   window.location.search = newSearch;
+      // }
     </script>
     <!-- your scripts -->
     <script src="env/config.js"></script>
@@ -26,11 +26,12 @@
   <body>
     <div id="main">
       <h1>chatterbox</h1>
-      <form>
+      <form id = "target">
         Message: <input type="text" name="message">
         <input type="submit" value="Submit">
       </form>
     </div>
+    <button class="newTweets"> Show New Tweets</button>
     <div id="chats"></div>
   </body>
 </html>
