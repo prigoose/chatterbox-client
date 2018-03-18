@@ -16,10 +16,12 @@ body {
     border-radius: 10px;
 }
 #roomCreationDiv {
-    /* add distance on top and bottom */
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 #chats {
     background: #cbd3d3;
+    opacity: 0.95;
     border: solid #cbd3d3;
 }
 #main, #roomCreationDiv {
@@ -31,6 +33,7 @@ body {
     font-family: 'Satisfy', cursive;
     margin-bottom: 5px;
     padding: 5px;
+    color: #dc143c;
 }
 
 #main h1 span {
@@ -111,12 +114,12 @@ form input[type=text] {
   padding:15px;
   margin:1em 0 3em;
   color:black;
-  background:#42f4d9;
+  background:#c1b6b6;
   /* css3 */
-  background:-webkit-gradient(linear, 0 0, 0 100%, from(#24e2a0), to(#42f4d9));
-  background:-moz-linear-gradient(#24e2a0, #42f4d9);
-  background:-o-linear-gradient(#24e2a0, #42f4d9);
-  background:linear-gradient(#24e2a0, #42f4d9);
+/*  background:-webkit-gradient(linear, 0 0, 0 100%, from(#f7d4d4), to(#c1b6b6));
+  background:-moz-linear-gradient(#f7d4d4, #c1b6b6);
+  background:-o-linear-gradient(#f7d4d4, #c1b6b6);
+  background:linear-gradient(#f7d4d4, #c1b6b6);*/
   -webkit-border-radius:10px;
   -moz-border-radius:10px;
   border-radius:10px;
@@ -131,7 +134,7 @@ form input[type=text] {
   border-right-width:30px; /* vary this value to change the angle of the vertex */
   border-bottom-width:20px; /* vary this value to change the height of the triangle. must be equal to the corresponding value in :after */
   border-style:solid;
-  border-color:transparent #42f4d9;
+  border-color:transparent #c1b6b6;
   /* reduce the damage in FF3.0 */
   display:block;
   width:0;
@@ -151,4 +154,21 @@ form input[type=text] {
   /* reduce the damage in FF3.0 */
   display:block;
   width:0;
+}
+.newTweets {
+    margin-bottom: 10px;
+    width: 35%;
+    height: 2em;
+    font-size: 28px;
+    font-family: 'Satisfy';
+    border-radius: 8px;
+}
+.newTweets:hover {
+    background: #cbd3d3;
+}
+button:hover {
+    cursor: pointer;
+}
+input:hover {
+    cursor: pointer;
 }
